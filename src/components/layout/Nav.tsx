@@ -1,17 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { site } from "@/config/site";
 
 function Logo() {
   return (
     <a href="/" className="group flex items-center gap-2.5">
-      <span className="relative flex h-7 w-7 items-center justify-center">
-        <span className="absolute inset-0 rounded-[9px] bg-gradient-to-br from-accent to-accent-2 opacity-90 transition-opacity group-hover:opacity-100" />
-        <span className="absolute inset-[3px] rounded-[6px] bg-bg" />
-        <span className="relative h-2 w-2 rounded-full bg-gradient-to-br from-accent to-accent-2" />
-      </span>
+      <Image
+        src="/Dreambase Logo Mark Black BG.png"
+        alt={`${site.name} logo`}
+        width={28}
+        height={28}
+        priority
+        className="h-7 w-7 object-contain transition-opacity group-hover:opacity-90"
+      />
       <span className="font-display text-[17px] font-semibold tracking-tight">
         {site.name}
       </span>
