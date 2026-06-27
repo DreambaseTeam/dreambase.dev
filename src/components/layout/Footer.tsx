@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { site } from "@/config/site";
 
 const columns = [
@@ -28,11 +29,13 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="relative flex h-7 w-7 items-center justify-center">
-                <span className="absolute inset-0 rounded-[9px] bg-gradient-to-br from-accent to-accent-2 opacity-90" />
-                <span className="absolute inset-[3px] rounded-[6px] bg-bg" />
-                <span className="relative h-2 w-2 rounded-full bg-gradient-to-br from-accent to-accent-2" />
-              </span>
+              <Image
+                src="/Dreambase Logo Mark Black BG.png"
+                alt={`${site.name} logo`}
+                width={28}
+                height={28}
+                className="h-7 w-7 object-contain"
+              />
               <span className="font-display text-[17px] font-semibold tracking-tight">
                 {site.name}
               </span>

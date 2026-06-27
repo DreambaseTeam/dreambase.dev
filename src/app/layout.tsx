@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   },
   description: site.description,
   metadataBase: new URL(`https://${site.domain}`),
+  icons: {
+    icon: "/Dreambase Logo Mark Black BG.png",
+    shortcut: "/Dreambase Logo Mark Black BG.png",
+    apple: "/Dreambase Logo Mark Black BG.png",
+  },
   openGraph: {
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
