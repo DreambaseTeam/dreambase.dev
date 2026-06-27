@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+/* ════════════════════════════════════════════════════════════════════
+   DREAMBASE — design tokens
+   A disciplined, near-black canvas with a single electric blue→violet
+   accent. Built for depth, restraint, and a "designed-in-Framer" feel.
+═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --bg:            #060608;
+  --bg-2:          #0a0a0f;
+  --surface:       #101018;
+  --surface-2:     #16161f;
+  --text:          #f4f4f7;
+  --text-2:        #9a9aab;
+  --text-3:        #62626f;
+  --accent:        #5b8cff;
+  --accent-2:      #8b5bff;
+  --accent-3:      #2fe3d0;
+  --accent-soft:   rgba(91, 140, 255, 0.14);
+  --line:          rgba(255, 255, 255, 0.08);
+  --line-2:        rgba(255, 255, 255, 0.04);
+  --glow:          rgba(91, 140, 255, 0.45);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--text);
+  --color-ink-2: var(--text-2);
+  --color-ink-3: var(--text-3);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-line: var(--line);
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* selection */
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* thin, quiet scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--surface-2);
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover { background: #24242e; }
+
+/* ── Utilities ─────────────────────────────────────────────────── */
+
+/* text gradient used in headlines */
+.text-gradient {
+  background: linear-gradient(110deg, var(--text) 0%, var(--text) 40%, var(--accent) 70%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.accent-gradient {
+  background: linear-gradient(110deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* hairline grid background */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--line-2) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line-2) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* radial fade mask for grids/glows */
+.mask-fade {
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 80%);
+}
+
+/* frosted card */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-2xl);
+  backdrop-filter: saturate(140%) blur(6px);
+}
+
+.card-hover {
+  transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.2,0.8,0.2,1), background 0.4s ease;
+}
+.card-hover:hover {
+  border-color: rgba(91, 140, 255, 0.35);
+  transform: translateY(-4px);
+  background: linear-gradient(180deg, rgba(91,140,255,0.06), rgba(255,255,255,0.012));
+}
+
+/* glowing pill */
+.pill {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(8px);
+}
+
+/* soft ambient glow blob */
+.glow-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* animated conic ring for the approach connector */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 18s linear infinite; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+.marquee-pause:hover .animate-marquee { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee, .animate-spin-slow { animation: none; }
+}
+
+/* ── Legal / long-form prose ───────────────────────────────────── */
+.legal-prose {
+  color: var(--text-2);
+  font-size: 15px;
+  line-height: 1.75;
+}
+.legal-prose > * + * { margin-top: 1.1rem; }
+.legal-prose h2 {
+  color: var(--text);
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 3rem;
+  scroll-margin-top: 6rem;
+}
+.legal-prose h2:first-child { margin-top: 0; }
+.legal-prose h3 {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.02rem;
+  margin-top: 1.75rem;
+}
+.legal-prose a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.legal-prose a:hover { text-decoration: underline; }
+.legal-prose strong { color: var(--text); font-weight: 600; }
+.legal-prose ul {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.legal-prose ul li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+.legal-prose ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  height: 6px;
+  width: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to bottom right, var(--accent), var(--accent-2));
+}
